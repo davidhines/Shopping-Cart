@@ -11,6 +11,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Frameworks Used
 
+* [React](https://reactjs.org/) - user interfaces
 * [Redux](https://redux.js.org/) - state management
 * [Redux Thunk](https://github.com/reduxjs/redux-thunk) - middleware for async dispatching
 * [React Persist](https://github.com/rt2zz/redux-persist) - for persisting data
