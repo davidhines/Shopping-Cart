@@ -63,6 +63,7 @@ class OrderSummary extends Component {
                 <Card.Footer className="text-center">
                     <Button variant="primary"
                          className="fr"
+                         disabled={cartItems.length < 1}
                         onClick={ e => checkout() }>
                         Checkout
                     </Button>
