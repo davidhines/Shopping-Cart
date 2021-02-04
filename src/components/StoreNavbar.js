@@ -1,15 +1,14 @@
-import { Component } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navbar, Nav, Button, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from "react-icons/fa";
 
-class StoreNavbar extends Component {
-    render() {        
-        const { cartQuantity } = this.props;
+const StoreNavbar = () => {
 
-        return(
-            <Navbar bg="light">
+    const cartQuantity = useSelector(state => state.cart.cartItems.length);
+
+    return(
+        <Navbar bg="light">
                 <Link to="/" className="nav-link">
                     <Navbar.Brand>
                         A-Z Company
@@ -26,13 +25,8 @@ class StoreNavbar extends Component {
                         </Button>
                     </Link>
                 </Nav.Item>
-            </Navbar>            
-        );
-    }
+            </Navbar>     
+    );
 }
 
-const mapStateToProps = state => ({
-    cartQuantity: state.cart.cartItems.length
-});
-
-export default connect(mapStateToProps)(StoreNavbar);
+export default StoreNavbar;

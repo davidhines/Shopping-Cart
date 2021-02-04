@@ -1,4 +1,4 @@
-import { ADD_TO_CART, CHECKOUT, REMOVE_FROM_CART, UPDATE_PRODUCT_QUANTITY } from ".././actions/types";
+import { ADD_TO_CART, CHECKOUT, DECREMENT_QUANTITY, INCREMENT_QUANTITY, REMOVE_FROM_CART, UPDATE_PRODUCT_QUANTITY } from ".././actions/types";
 
 const initialState = {
     cartItems: [],
@@ -14,16 +14,18 @@ const addDistinct = (items, item) => {
     }
 }
 
-const updateItem = (items, item) => {
-    let index = items.findIndex(i => i.id === item.id);
-
-    if (index !== -1) {
-        items[index] = item;
+const updateQuantity = (product, action) => {
+    switch(action.payload.action) {
+        case INCREMENT_QUANTITY:
+            return ++product.quantity;
+        case DECREMENT_QUANTITY:
+            return --product.quantity;
+        default:
+            return product.quantity;
     }
 }
 
 const cartReducer = (state = initialState, action) => {
-
     switch(action.type) {
         case ADD_TO_CART:            
             addDistinct(state.cartItems, action.payload);
@@ -39,9 +41,8 @@ const cartReducer = (state = initialState, action) => {
         case UPDATE_PRODUCT_QUANTITY:
             return {
                 ...state,
-                cartItems: state.cartItems.map(item => item.id === action.payload.id ?
-                    { ...item, quantity: action.payload.quantity } :
-                    item
+                cartItems: state.cartItems.map(item => item.id === action.payload.product.id ?
+                    { ...item, quantity: updateQuantity(action.payload.product, action) } : item
                 )
             }
         case CHECKOUT:

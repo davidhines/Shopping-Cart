@@ -1,4 +1,9 @@
-import { ADD_TO_CART, CHECKOUT, REMOVE_FROM_CART, UPDATE_PRODUCT_QUANTITY } from ".././actions/types";
+import { 
+    ADD_TO_CART, 
+    CHECKOUT, 
+    REMOVE_FROM_CART, 
+    UPDATE_PRODUCT_QUANTITY
+} from ".././actions/types";
 
 export const addToCart = product => async dispatch => {    
     dispatch({
@@ -20,9 +25,12 @@ export const removeFromCart = product => async dispatch => {
     });
 }
 
-export const updateQuantity = product => async dispatch => {
+export const updateQuantity = (product, action) => async dispatch => {
     dispatch({
         type: UPDATE_PRODUCT_QUANTITY,
-        payload: product
+        payload: {
+            product,
+            action
+        }
     });
 }

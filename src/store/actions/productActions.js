@@ -1,23 +1,20 @@
 import axios from "axios"
-import { GET_PRODUCTS_FAILURE, GET_PRODUCTS_SUCCESS, SEARCH_PRODUCTS } from ".././actions/types";
+import { GET_PRODUCTS_SUCCESS, SEARCH_PRODUCTS } from ".././actions/types";
 
+const fakeProductUrl = 'https://fakestoreapi.com/products';
 
 export const getProducts = () => async dispatch => {
-    
-    try {
-        let result = await axios.get('https://fakestoreapi.com/products');
-        
-        dispatch({
-            type: GET_PRODUCTS_SUCCESS,
-            payload: result.data
+
+    await axios.get(fakeProductUrl)
+        .then((result) => {
+            dispatch({
+                type: GET_PRODUCTS_SUCCESS,
+                payload: result.data
+            });
+        })
+        .catch((ex) => {
+
         });
-    }
-    catch(exception) {
-        dispatch({
-            type: GET_PRODUCTS_FAILURE,
-            payload: exception
-        });
-    }
 }
 
 export const searchProducts = (searchTerm) => async dispatch => {
